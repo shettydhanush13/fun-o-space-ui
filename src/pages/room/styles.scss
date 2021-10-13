@@ -1,0 +1,213 @@
+.arena {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    .gameWrapper{
+        display: flex;
+        width: 70vw;
+        height: calc(100vh - 3vw - 30px);
+        align-items: center;
+        position: relative;
+    }
+    .GameContainer {
+        position: relative;
+        width: 50vh;
+        height: 50vh;
+        background-color: #fafafa;
+        background-size: contain;
+        margin: 10vh auto;
+        // border: 1px solid brown;
+        border-radius: 5px;
+        background-image: url('http://www.olddominionfurniture.com/w/wp-content/uploads/2014/08/T-OP.png');
+        background-size: contain;
+        button {
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            padding: 15px 20px;
+            margin: 0 10px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+        .circle{
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #333;
+            border-radius: 50%;
+            // background-image: url('https://www.moeshomecollection.com/wp-content/uploads/2020/10/KC-1029-03_04-940x940.jpg');
+            background-size: contain
+        }
+        .avatar_1 {
+            left: 50%;
+            top: 0;
+            transform: translate(-50%, -100%);
+            position: absolute;
+        }
+        .avatar_2 {
+            left: 100%;
+            top: 50%;
+            transform: translate(0, -50%);
+            position: absolute;
+        }
+        .avatar_3 {
+            left: 50%;
+            top: 100%;
+            transform: translate(-50%);
+            position: absolute;
+        }
+        .avatar_4 {
+            left: 0;
+            top: 50%;
+            transform: translate(-100%, -50%);
+            position: absolute;
+        }
+        .role_1, .role_2, .role_3, .role_4 {
+            position: absolute;
+            width: max-content;
+        }
+        .role_1 {
+            left: 50%;
+            top: 15%;
+            transform: translate(-55%, -100%);
+        }
+        .role_2 {
+            left: 82.5%; 
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .role_3 {
+            left: 50%;
+            top: 85%;
+            transform: translate(-60%);
+        }
+        .role_4 {
+            left: 17.5%;
+            top: 50%;
+            transform: translate(-65%, -50%);
+        }
+        span {
+            color: #333;
+            font-weight: 500;
+            font-size: 18px;
+            padding: 2.5%;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+    }
+    .scoreBoard, .chatRoom{
+        width: 25vw;
+        padding: 0 1%;
+        box-sizing: border-box;
+        text-align: center;
+        ul {
+            display: flex;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            li {
+                text-transform: uppercase;
+            }
+        }
+    }
+    .chatRoom{
+        position: absolute;
+        width: 28vw;
+        right: 0;
+        height: calc(100vh - 3vw - 30px);
+        padding-top: 1.5vw;
+        top: calc(3vw + 30px);
+        box-shadow: -5px 0 5px -5px #333;
+        margin: 0 0 0 2vw;
+        section {
+            height: 80%;
+            overflow-y: scroll;
+            padding: 0 5px;
+        }
+        form{
+            position: absolute;
+            bottom: 1vw;
+            width: 100%;
+            left: 0;
+            display: flex;
+            input{
+                padding: 2%;
+                margin-right: 5px;
+                width: 75%;
+                border: 1px solid lightgray;
+                border-radius: 5px;
+                margin-left: 10px;
+            }
+        }
+        .myText {
+            max-width: 75%;
+            text-align: left;
+            padding: 10px 15px;
+            border-radius: 20px;
+            line-height: 130%;
+            background-color: #fff;
+            width: fit-content;
+            left: 100%;
+            position: relative;
+            transform: translate(-100%);
+            border: 1px solid #fa6855;
+            color: #fa6855;
+        }
+        .othersText {
+            max-width: 75%;
+            text-align: left;
+            padding: 10px 15px;
+            border-radius: 20px;
+            line-height: 130%;
+            background-color: #fa6855;
+            width: fit-content;
+            color: #fff;
+        }
+        .submit {
+            width: 25%;
+            border: none;
+            border-radius: 5px;
+            background-color: #fa6855;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+        }
+    }
+}
+
+.gameHeader{
+    display: flex;
+    justify-content: space-between;
+    background: #cd4b4b;
+    padding: 15px;
+    height: 3vw;
+    div {
+        width: fit-content;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    p {
+        text-transform: uppercase;
+        font-weight: 900;
+        color: #fff;
+        margin: 0 20px;
+    }
+    button {
+        border: none;
+        border-radius: 5px;
+        background-color: #fff;
+        font-weight: 900;
+        color: #333;
+        text-transform: uppercase;
+        padding: 15px 20px;
+        margin: 0 10px;
+    }
+}

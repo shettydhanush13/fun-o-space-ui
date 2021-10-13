@@ -1,24 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import DashBoard from './pages/home'
+import Room from './pages/room'
+import io from "socket.io-client";
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [socket, setSocket] = useState(null)
+
+  const connect = async () => {
+    setSocket(io("http://localhost:8080", {
+    transports: ['websocket'],
+    }))
+  }
+
+  useEffect(() => {
+    connect()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+          <Route exact path={'/'} component={DashBoard} />
+          {socket && <Route exact path={'/room/:roomId'}><Room socket={socket}/></Route>}
+      </Switch>
+    </BrowserRouter>
   );
 }
 
