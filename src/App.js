@@ -9,7 +9,7 @@ function App() {
   const [socket, setSocket] = useState(null)
 
   const connect = async () => {
-    setSocket(io("http://localhost:8080", {
+    setSocket(io("https://fun-o-space-service.herokuapp.com/:8080", {
     transports: ['websocket'],
     }))
   }

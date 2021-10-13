@@ -1,7 +1,5 @@
 import io from "socket.io-client";
 
-const socket = io('http://localhost:8080', { transports: ['websocket'] });
-
 const hashCode = (str) => {
 	let hash = 0;
 	for (let i = 0; i < str.length; i++) {
@@ -58,7 +56,6 @@ function shuffleArray(array) {
 }
 
 export {
-  socket,
   shuffleArray,
 	getInitials,
 	hashCode,
