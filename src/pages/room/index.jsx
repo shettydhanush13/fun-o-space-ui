@@ -82,7 +82,7 @@ const Room = ({ socket }) => {
                         {guessed && <ResultAnimation type={result}/>}
                         {users.map((user, i) => (
                             <>
-                            {userMap && <Avatar className={`avatar_${i+1}`} id={user} data={{name: (socket.id === user) ? "M E" : (userMap[user] || user), image: ''}}/>}
+                            {userMap && <Avatar className={`avatar_${i+1}`} id={user} data={{name: (socket.id === user) ? "ME" : (userMap[user] || user), image: ''}}/>}
                             {gameRoles && (socket.id === user || gameRoles[socket.id] !== "POLICE")   
                             ? <span className={`role_${i+1}`}>{gameRoles[user]}</span>
                             :
