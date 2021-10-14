@@ -9,9 +9,13 @@ function App() {
   const [socket, setSocket] = useState(null)
 
   const connect = async () => {
-    setSocket(io("https://fun-o-space-service.herokuapp.com/:8080", {
-    transports: ['websocket'],
-    }))
+    const connectionOptions = {
+      "force new connection": true,
+      reconnectionAttempts: "Infinity",
+      timeout: 10000,
+      transports: ["websocket"],
+    };
+    setSocket(io("ws://fun-o-space-service.herokuapp.com", connectionOptions))
   }
 
   useEffect(() => {
