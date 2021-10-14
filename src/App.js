@@ -15,7 +15,7 @@ function App() {
       timeout: 10000,
       transports: ["websocket"],
     };
-    setSocket(io("ws://fun-o-space-service.herokuapp.com", connectionOptions))
+    setSocket(io("https://fun-o-space-service.herokuapp.com", connectionOptions))
   }
 
   useEffect(() => {
