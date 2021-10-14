@@ -1,0 +1,49 @@
+.gameLobby{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    button {
+        width: 20%;
+        border: none;
+        border-radius: 5px;
+        background-color: #cd4b4b;
+        font-weight: 900;
+        color: #FFF;
+        text-transform: uppercase;
+        padding: 15px 20px;
+        margin: 5%;
+    }
+    input{
+        padding: 1%;
+        margin-right: 5px;
+        width: 25%;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        margin-left: 10px;
+    }
+    span {
+        font-size: 24px;
+        font-weight: bolder;
+    }
+    span, p {
+        color: grey;
+    }
+    .joinGameButton{
+        margin-top: 1%;
+    }
+    .joinRoomSection{
+        display: flex;
+        width: 30%;
+        button {
+            margin: 0;
+        }
+        input{
+            width: 75%;
+            margin: 0;
+            margin-right: 10px;
+            padding: 1% 5%;
+        }
+    }
+}
