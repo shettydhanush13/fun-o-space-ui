@@ -16,16 +16,6 @@ const DashBoard = () => {
   
   return (
       <Container fluid className="p-0">
-        <header className="gameHeader">
-          <div>
-              {/* <p>Room ID : {roomId}</p>
-              <p>Players Joined : {users.length}/4</p> */}
-          </div>
-          <div>
-              {/* <button onClick={() => users.length !== 4 ? alert('4 players required to start the game') : socket.emit('start-game', roomId, users)}>Start game</button>
-              <button onClick={() => socket.emit('leave-room', roomId)}>Leave room</button> */}
-          </div>
-        </header>
         <div className="gameLobby">
           <button onClick={createRoom}>CREATE ROOM</button>
           {newRoomId !== '' && <span>ROOM ID : {newRoomId}</span>}

@@ -3,10 +3,16 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import DashBoard from './pages/home'
 import Room from './pages/room'
 import io from "socket.io-client";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useReducer } from 'react';
+import GlobalState, { reducer } from "./globalStore";
+
+const initialState = {
+  lang: 'KA'
+};
 
 function App() {
   const [socket, setSocket] = useState(null)
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const connect = async () => {
     const connectionOptions = {
@@ -23,12 +29,14 @@ function App() {
   }, [])
 
   return (
-    <BrowserRouter>
-      <Switch>
-          <Route exact path={'/'} component={DashBoard} />
-          {socket && <Route exact path={'/room/:roomId'}><Room socket={socket}/></Route>}
-      </Switch>
-    </BrowserRouter>
+    <GlobalState initialState={state} dispatch={dispatch}>
+      <BrowserRouter>
+        <Switch>
+            <Route exact path={'/'} component={DashBoard} />
+            {socket && <Route exact path={'/room/:roomId'}><Room socket={socket}/></Route>}
+        </Switch>
+      </BrowserRouter>
+    </GlobalState>
   );
 }
 
