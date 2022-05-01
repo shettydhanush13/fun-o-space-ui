@@ -1,21 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import Avatar from '../../components/avatar'
 import LeaderBoard from '../../components/leaderBoard'
+import Chatroom from '../../components/chatroom'
 import ResultAnimation from '../../components/result'
+import lang from '../../assets/translation.json'
+import {GlobalStateContext, GlobalDispatchContext, LANG} from '../../globalStore'
 
 import './styles.scss'
 
 const Room = ({ socket }) => {
 
-    const [scoreboard, setScoreboard] = useState({})
-
+    const globalState = useContext(GlobalStateContext)
+    const dispatch = useContext(GlobalDispatchContext)    
     const history = useHistory()
+
+    const [scoreboard, setScoreboard] = useState({})
     const [roomId] = useState(history.location.pathname.split('/')[2])
     const [users, setUsers] = useState([])
     const [userMap, setUserMap] = useState(null)
-    const [messages, setMessages] = useState([])
     const [gameRoles, setGameRoles] =  useState(null)
     const [guessed, setGuessed] = useState(false)
     const [result, setResult] = useState('success')
@@ -34,13 +38,6 @@ const Room = ({ socket }) => {
         setUsers(details.users)
     });
 
-    socket.off('recieved-message').on("recieved-message", (msg) => {
-        const m = [...messages]
-        setMessages([...m, msg])
-        const objDiv = document.getElementById("messageContainer");
-        objDiv.scrollTop = objDiv.scrollHeight;
-    });
-
     socket.off('room-left').on("room-left", () => history.push('/'))
 
     socket.off('game-started').on("game-started", (mapRoles) => {
@@ -56,23 +53,21 @@ const Room = ({ socket }) => {
             socket.emit('start-game', roomId, users)
         }, 5000)
     })
-
-    const sendMessage = (e) => {
-        e.preventDefault();
-        socket.emit('new-message', document.getElementById('message').value, roomId, socket.id)
-        document.getElementById('message').value = ''
-    }
     
     return (
         <Container fluid className="p-0">
             <header className="gameHeader">
                 <div>
-                    <p>Room ID : {roomId}</p>
-                    <p>Players Joined : {users.length}/4</p>
+                    <p>{lang[globalState.lang]['ROOM ID']} :  &nbsp;{roomId}</p>
+                    <p>{lang[globalState.lang]['PLAYERS JOINED']} :  &nbsp;{users.length}/4</p>
+                    <p>Language :  &nbsp;<select name="language" id="language" className='selectBox' onChange={(e) => dispatch({ type: LANG, payload: e.target.value })}>
+                        <option value="KA">KANNADA</option>
+                        <option value="EN">ENGLISH</option>
+                    </select></p>
                 </div>
                 <div>
-                    <button onClick={() => users.length !== 4 ? alert('4 players required to start the game') : socket.emit('start-game', roomId, users)}>Start game</button>
-                    <button onClick={() => socket.emit('leave-room', roomId)}>Leave room</button>
+                    <button onClick={() => users.length !== 4 ? alert('4 players required to start the game') : socket.emit('start-game', roomId, users)}>{lang[globalState.lang]['START GAME']}</button>
+                    <button onClick={() => socket.emit('leave-room', roomId)}>{lang[globalState.lang]['LEAVE ROOM']}</button>
                 </div>
             </header>
             
@@ -84,9 +79,9 @@ const Room = ({ socket }) => {
                             <>
                             {userMap && <Avatar className={`avatar_${i+1}`} id={user} data={{name: (socket.id === user) ? "ME" : (userMap[user] || user), image: ''}}/>}
                             {gameRoles && (socket.id === user || gameRoles[socket.id] !== "POLICE")   
-                            ? <span className={`role_${i+1}`}>{gameRoles[user]}</span>
+                            ? <span className={`role_${i+1}`}>{lang[globalState.lang][gameRoles[user]]}</span>
                             :
-                            <button onClick={() => socket.emit('guess-kalla', gameRoles[user] === 'KALLA', roomId, gameRoles, scoreboard)} className={`role_${i+1}`}>kalla ?</button>}
+                            <button onClick={() => socket.emit('guess-kalla', gameRoles[user] === 'KALLA', roomId, gameRoles, scoreboard)} className={`role_${i+1}`}>{lang[globalState.lang]['KALLA']} ?</button>}
                             </>
                         ))}
                     </div>
@@ -94,22 +89,7 @@ const Room = ({ socket }) => {
                         {scoreboard && <LeaderBoard userMap={userMap} data={scoreboard}/>}
                     </div>               
                 </div>
-                <div className="chatRoom">
-                    <p>CHAT ROOM</p>
-                    <br />
-                    <section id='messageContainer'>
-                        {messages.map(({user, msg}) => (
-                            <div style={{display: 'flex'}}>
-                                {userMap && socket.id !== user && <Avatar data={{name: (socket.id === user) ? "M E" : (userMap[user] || user), image: ''}}/>}
-                                <p className={socket.id === user ? 'myText' : 'othersText'}>{socket.id === user ? '' : ``}{msg}</p>
-                            </div>
-                        ))}
-                    </section>    
-                    <form autoComplete='off' onSubmit={sendMessage}>
-                        <input type="text" id='message'/>
-                        <input className='submit' type="submit" value="SEND" />
-                    </form>
-                </div>
+                <Chatroom socket={socket} userMap={userMap} roomId={roomId}/>
             </div>
         </Container>
     );

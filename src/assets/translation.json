@@ -1,0 +1,26 @@
+{
+    "KA": {
+        "POLICE": "ಪೊಲೀಸ್",
+        "KALLA": "ಕಳ್ಳ",
+        "RAJA": "ರಾಜ",
+        "RANI": "ರಾಣಿ",
+        "ROOM ID": "ಕೊಠಡಿ ಸಂಖ್ಯೆ",
+        "START GAME": "ಆಟ ಪ್ರಾರಂಭಿಸಿ",
+        "LEAVE ROOM": "ಕೊಠಡಿ ಬಿಡಿ",
+        "PLAYERS JOINED": "ಸೇರಿಕೊಂಡ ಆಟಗಾರರು",
+        "CHAT ROOM": "ಹರಟೆ ಕೋಣೆ",
+        "SEND": "ಕಳುಹಿಸು"
+    },
+    "EN": {
+        "POLICE": "POLICE",
+        "KALLA": "THIEF",
+        "RAJA": "KING",
+        "RANI": "QUEEN",
+        "ROOM ID": "ROOM ID",
+        "START GAME": "START GAME",
+        "LEAVE ROOM": "LEAVE ROOM",
+        "PLAYERS JOINED": "PLAYERS JOINED",
+        "CHAT ROOM": "CHAT ROOM",
+        "SEND": "SEND"
+    }
+}
